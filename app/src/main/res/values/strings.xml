@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WhatToSee</string>
+    <string name="rating">Rating</string>
+    <string name="genres">Genres</string>
+    <string name="description">Description</string>
+
+    <string name="category_new_movies">New</string>
+    <string name="category_liked_movies">Liked</string>
+</resources>
