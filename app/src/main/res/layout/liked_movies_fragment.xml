@@ -7,9 +7,10 @@
         android:background="@color/colorBackground"
         tools:context=".fragments.LikedMoviesFragment">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+    <android.support.v7.widget.RecyclerView
+    android:id="@+id/liked_recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:listitem="@layout/movie_item"/>
 
 </FrameLayout>

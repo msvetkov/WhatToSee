@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.lotuss.whattosee.R
-import com.lotuss.whattosee.viewmodel.LikedMoviesViewModel
+import com.lotuss.whattosee.viewmodels.LikedMoviesViewModel
 
 class LikedMoviesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LikedMoviesFragment()
-    }
 
-    private lateinit var viewModel: LikedMoviesViewModel
+
+    //private lateinit var viewModel: LikedMoviesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +25,7 @@ class LikedMoviesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(LikedMoviesViewModel::class.java)
+        //viewModel = ViewModelProviders.of(this).get(LikedMoviesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

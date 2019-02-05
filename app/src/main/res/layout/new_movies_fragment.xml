@@ -7,9 +7,10 @@
         android:background="@color/colorBackground"
         tools:context=".fragments.NewMoviesFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/new_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello"/>
+            tools:listitem="@layout/movie_item"/>
 
 </FrameLayout>
