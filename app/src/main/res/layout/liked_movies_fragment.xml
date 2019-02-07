@@ -5,12 +5,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:context=".fragments.LikedMoviesFragment">
+        tools:context=".view.fragments.LikedMoviesFragment">
 
-    <android.support.v7.widget.RecyclerView
-    android:id="@+id/liked_recycler_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:listitem="@layout/movie_item"/>
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/liked_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/new_movie_item"/>
 
 </FrameLayout>

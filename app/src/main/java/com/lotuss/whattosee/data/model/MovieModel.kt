@@ -10,7 +10,9 @@ data class MovieModel (
     @SerializedName("movie_year")val year: String,
     @SerializedName("Categories")val genres: String,
     @SerializedName("summary")val description: String,
+    @SerializedName("ImageURL")val imageUrl: String,
     @SerializedName("imdb_rating")val rating: String
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
+    var likedStatus: Int = 0
 }

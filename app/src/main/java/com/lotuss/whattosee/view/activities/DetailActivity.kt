@@ -1,4 +1,4 @@
-package com.lotuss.whattosee.activities
+package com.lotuss.whattosee.view.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

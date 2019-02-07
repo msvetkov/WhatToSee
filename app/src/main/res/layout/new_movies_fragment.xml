@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:context=".fragments.NewMoviesFragment">
+        tools:context=".view.fragments.NewMoviesFragment">
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/new_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/movie_item"/>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
 
-</FrameLayout>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/new_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/new_movie_item"/>
+
+        <ProgressBar android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:id="@+id/progress"/>
+
+    </FrameLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

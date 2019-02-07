@@ -3,7 +3,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:focusable="true">
 
         <FrameLayout
                 android:layout_width="match_parent"
@@ -11,7 +14,7 @@
                 android:background="@color/colorAccent">
 
             <ImageView android:layout_width="match_parent"
-                       android:layout_height="300dp"
+                       android:layout_height="350dp"
                        android:id="@+id/movie_image"/>
 
             <LinearLayout
@@ -32,7 +35,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                            android:maxLines="2"
+                            android:maxLines="3"
                             android:textColor="@color/colorText"
                             android:textStyle="bold"
                             android:id="@+id/movie_title"/>
@@ -51,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:background="@android:color/transparent"
+                        android:background="?android:attr/selectableItemBackground"
                         android:padding="8dp"
                         android:src="@drawable/ic_not_like"
                         android:id="@+id/movie_like"/>

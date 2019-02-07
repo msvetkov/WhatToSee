@@ -10,11 +10,15 @@ class LikedMoviesViewModel(application: Application) : AndroidViewModel(applicat
 
     private val movieProvider = MovieProvider()
 
-    fun deleteFromLiked(movie: MovieModel){
+    fun getLikedMovies(): LiveData<List<MovieModel>> {
+        return movieProvider.getLikedMovies()
+    }
+
+    fun deleteFromLiked(movie: MovieModel) {
         movieProvider.deleteFromLiked(movie)
     }
 
-    fun getLikedMovies(): LiveData<List<MovieModel>> {
-        return movieProvider.getLikedMovies()
+    fun insertToLiked(movie: MovieModel) {
+        movieProvider.insertToLiked(movie)
     }
 }
