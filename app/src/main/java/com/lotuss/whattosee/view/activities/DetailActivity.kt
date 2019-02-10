@@ -1,13 +1,59 @@
 package com.lotuss.whattosee.view.activities
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.widget.ImageView
 import com.lotuss.whattosee.R
+import com.lotuss.whattosee.viewmodels.MoviesViewModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
+
+    private var id: Long = 1
+    private lateinit var viewModel: MoviesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        supportActionBar!!.title = "Movie info"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val bundle = intent.extras
+        if (bundle != null) id = intent.extras!!.getString("id")!!.toLong()
+
+        viewModel = ViewModelProviders.of(this).get(MoviesViewModel(this.application)::class.java)
+        viewModel.getMovieById(id).observe(this, Observer {
+            if (it != null) {
+                detail_title.text = it.title
+                detail_description.text = it.description
+                detail_genres.text = it.genres
+                detail_year.text = it.year
+                detail_rating.text = it.rating
+                loadImage(detail_image, it.imageUrl)
+            }
+
+        })
+    }
+
+    private fun loadImage(imageView: ImageView, url: String) {
+        Picasso.get()
+            .load(url)
+            .into(imageView)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                this.finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

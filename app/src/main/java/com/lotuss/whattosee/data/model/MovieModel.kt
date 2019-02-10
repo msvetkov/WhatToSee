@@ -4,15 +4,15 @@ import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "liked_movies")
+@Entity(tableName = "movies")
 data class MovieModel (
     @SerializedName("Title")val title: String,
     @SerializedName("movie_year")val year: String,
     @SerializedName("Categories")val genres: String,
-    @SerializedName("summary")val description: String,
+    @SerializedName("summary")var description: String,
     @SerializedName("ImageURL")val imageUrl: String,
     @SerializedName("imdb_rating")val rating: String
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
-    var likedStatus: Int = 0
+    var isLiked: Boolean = false
 }

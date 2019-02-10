@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase
 import com.lotuss.whattosee.data.model.MovieModel
 
 
-@Database(entities = [MovieModel::class], version = 2, exportSchema = false)
+@Database(entities = [MovieModel::class], version = 3, exportSchema = false)
 abstract class MovieDatabase: RoomDatabase() {
 
     abstract fun movieDao(): MovieDao

@@ -13,4 +13,17 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/new_movie_item"/>
 
+
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:textStyle="bold"
+                      android:textSize="20sp"
+                      android:textColor="@color/colorText"
+                      android:text="@string/empty_liked"
+                      android:drawablePadding="4dp"
+                      android:drawableTop="@drawable/ic_empty_liked"/>
+
+
 </FrameLayout>

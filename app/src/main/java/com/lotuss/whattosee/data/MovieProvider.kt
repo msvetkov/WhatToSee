@@ -2,18 +2,15 @@ package com.lotuss.whattosee.data
 
 import android.arch.lifecycle.LiveData
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import android.os.AsyncTask
 import com.lotuss.whattosee.application.WhatToSeeApplication
 import com.lotuss.whattosee.data.apiservice.ApiService
 import com.lotuss.whattosee.data.database.MovieDao
 import com.lotuss.whattosee.data.database.MovieDatabase
 import com.lotuss.whattosee.data.model.MovieModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.Observable
 import javax.inject.Inject
-import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -28,60 +25,76 @@ class MovieProvider{
     @Inject
     lateinit var movieDatabase: MovieDatabase
 
-    var movieDao: MovieDao
+    private var movieDao: MovieDao
 
-    val newMovieList = mutableListOf<MovieModel>()
-    private var likedMovies: LiveData<List<MovieModel>>
-    private val data = MutableLiveData<List<MovieModel>>()
+    private var newMovieList: LiveData<List<MovieModel>>
 
     init {
         WhatToSeeApplication.movieProviderComponent.inject(this)
         movieDao = movieDatabase.movieDao()
-        likedMovies = movieDao.getAllLiked()
+        newMovieList = movieDao.getAllMovies()
     }
 
-    fun insertToLiked(movie: MovieModel) {
-        InsertMovieAsyncTask(movieDao).execute(movie)
+    fun addToLiked(movie: MovieModel) {
+        AddToLikedAsyncTask(movieDao).execute(movie)
     }
 
-    fun deleteFromLiked(movie: MovieModel) {
-        DeleteMovieAsyncTask(movieDao).execute(movie)
+    fun getById(movieID: Long): LiveData<MovieModel> {
+        return movieDao.getById(movieID)
     }
 
-    fun getLikedMovies(): LiveData<List<MovieModel>> {
-        return likedMovies
+    fun getMovies(): LiveData<List<MovieModel>> {
+        newMovieList.observeForever {
+            if (it!!.isEmpty())
+                loadNewMovies()
+        }
+        return newMovieList
     }
 
-    fun getNewMovies(): MutableLiveData<List<MovieModel>> {
-        return data
-    }
-
-    fun loadNewMovies() {
+    private fun loadNewMovies() {
         val compositeDisposable = CompositeDisposable()
         val movies = apiService.getNewMovies()
-
         compositeDisposable.add(movies
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                data.value = it
+                    insertMovie(it)
             }, {
-                data.value = null
+                //handing
             })
         )
     }
 
-    private class InsertMovieAsyncTask(val movieDao: MovieDao) : AsyncTask<MovieModel, Unit, Unit>() {
+    private fun insertMovie(movies: List<MovieModel>){
+        val bufferItems = mutableListOf<MovieModel>()
 
-        override fun doInBackground(vararg params: MovieModel?) {
-            movieDao.insert(params[0]!!)
+        var id = 1
+        movies.forEach {movie ->
+            movie.id = id++
+            bufferItems.add(movie)
         }
+
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(Observable.fromCallable {
+            bufferItems.forEach {
+                try {
+                    movieDao.insertMovie(it)
+                }catch (e: SQLiteConstraintException){
+                    //Some replies from server come in wrong format.
+                }
+            }
+        }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+        )
     }
 
-    private class DeleteMovieAsyncTask(val movieDao: MovieDao) : AsyncTask<MovieModel, Unit, Unit>() {
+
+    private class AddToLikedAsyncTask(val movieDao: MovieDao) : AsyncTask<MovieModel, Unit, Unit>() {
 
         override fun doInBackground(vararg params: MovieModel?) {
-            movieDao.delete(params[0]!!)
+            movieDao.addToLiked(params[0]!!.id.toLong(), params[0]!!.isLiked)
         }
     }
 }

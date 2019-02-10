@@ -6,4 +6,8 @@
 
     <string name="category_new_movies">New</string>
     <string name="category_liked_movies">Liked</string>
+    <string name="Search">search</string>
+    <string name="empty_liked">You haven\'t liked anything yet</string>
+    <string name="like_button">like button</string>
+    <string name="movie_image">movie image</string>
 </resources>
