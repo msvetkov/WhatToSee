@@ -12,7 +12,7 @@
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent">
+                android:background="@color/gray">
 
             <ImageView android:layout_width="match_parent"
                        android:layout_height="270dp"

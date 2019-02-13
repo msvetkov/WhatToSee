@@ -23,7 +23,8 @@
                       android:textColor="@color/colorText"
                       android:text="@string/empty_liked"
                       android:drawablePadding="4dp"
-                      android:drawableTop="@drawable/ic_empty_liked"/>
+                      android:drawableTop="@drawable/ic_empty_liked"
+                      android:id="@+id/empty_liked_text"/>
 
 
 </FrameLayout>

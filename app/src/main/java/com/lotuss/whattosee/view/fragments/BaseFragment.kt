@@ -17,6 +17,7 @@ open class BaseFragment: Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var searchView: SearchView
     private lateinit var menuItem: MenuItem
+    private lateinit var optionsItem: MenuItem
     private var searchText: String = ""
 
     override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -24,8 +25,7 @@ open class BaseFragment: Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(text: String?): Boolean {
-        searchText = text!!
-        adapter.searchMovies(searchText)
+        viewModel.searchText.value = text!!
         return true
     }
 
@@ -35,8 +35,8 @@ open class BaseFragment: Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.new_movies_menu, menu)
-        menuItem = menu!!.findItem(R.id.action_search)
+        inflater!!.inflate(R.menu.movies_menu, menu)
+        menuItem = menu!!.findItem(R.id.search)
         searchView = menuItem.actionView as SearchView
         searchView.setOnQueryTextListener(this)
 
@@ -45,6 +45,9 @@ open class BaseFragment: Fragment(), SearchView.OnQueryTextListener {
             searchView.setQuery(searchText, true)
             searchView.isIconified = false
         }
+
+        optionsItem = menu.findItem(R.id.options)
+        optionsItem.setOnMenuItemClickListener {true}
         super.onCreateOptionsMenu(menu, inflater)
     }
 
