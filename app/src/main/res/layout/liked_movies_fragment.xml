@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:context=".view.fragments.LikedMoviesFragment">
+        tools:context=".views.fragments.LikedMoviesFragment">
 
             <android.support.v7.widget.RecyclerView
             android:id="@+id/liked_recycler_view"

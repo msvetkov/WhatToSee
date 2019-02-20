@@ -1,6 +1,6 @@
 package com.lotuss.whattosee.di
 
-import com.lotuss.whattosee.data.MovieProvider
+import com.lotuss.whattosee.data.provider.MovieProvider
 import dagger.Component
 import javax.inject.Singleton
 

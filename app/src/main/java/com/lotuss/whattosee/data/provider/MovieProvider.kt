@@ -1,6 +1,7 @@
-package com.lotuss.whattosee.data
+package com.lotuss.whattosee.data.provider
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
 import android.os.AsyncTask
@@ -28,6 +29,7 @@ class MovieProvider{
     private var movieDao: MovieDao
 
     private var newMovieList: LiveData<List<MovieModel>>
+    val isConnect: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
         WhatToSeeApplication.movieProviderComponent.inject(this)
@@ -58,9 +60,10 @@ class MovieProvider{
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({
-                    insertMovie(it)
+                insertMovie(it)
+                isConnect.value = true
             }, {
-                //handing
+                isConnect.value = false
             })
         )
     }

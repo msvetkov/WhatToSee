@@ -1,10 +1,10 @@
-package com.lotuss.whattosee.view.activities
+package com.lotuss.whattosee.views.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.lotuss.whattosee.R
-import com.lotuss.whattosee.view.adapters.SimpleFragmentPagerAdapter
+import com.lotuss.whattosee.views.adapters.SimpleFragmentPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

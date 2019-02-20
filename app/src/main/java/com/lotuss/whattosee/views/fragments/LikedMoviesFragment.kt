@@ -1,4 +1,4 @@
-package com.lotuss.whattosee.view.fragments
+package com.lotuss.whattosee.views.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -11,8 +11,8 @@ import android.view.ViewGroup
 
 import com.lotuss.whattosee.R
 import com.lotuss.whattosee.data.model.MovieModel
-import com.lotuss.whattosee.view.adapters.MovieAdapter
-import com.lotuss.whattosee.viewmodels.MoviesViewModel
+import com.lotuss.whattosee.views.adapters.MovieAdapter
+import com.lotuss.whattosee.viewmodel.MoviesViewModel
 
 import kotlinx.android.synthetic.main.liked_movies_fragment.*
 import kotlinx.android.synthetic.main.liked_movies_fragment.view.*
@@ -37,10 +37,15 @@ class LikedMoviesFragment : BaseFragment() {
         viewModel.getMovies().observe(this, Observer<List<MovieModel>> {
             val list: List<MovieModel> = it!!.filter {movie -> movie.isLiked }
             adapter.setMovies(list)
+            adapter.searchMovies(viewModel.searchText.value!!)
             showEmptyLayout(list.isEmpty())
         })
         viewModel.searchText.observe(this, Observer<String> {
             adapter.searchMovies(it!!)
+        })
+
+        viewModel.getIsConnect().observe(this, Observer<Boolean> {
+            showErrorMessage(it!!)
         })
     }
 

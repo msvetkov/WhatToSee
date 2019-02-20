@@ -1,7 +1,6 @@
 package com.lotuss.whattosee.data.database
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.persistence.room.*
 import com.lotuss.whattosee.data.model.MovieModel
 

@@ -1,12 +1,12 @@
-package com.lotuss.whattosee.view.adapters
+package com.lotuss.whattosee.views.adapters
 
 import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.lotuss.whattosee.R
-import com.lotuss.whattosee.view.fragments.LikedMoviesFragment
-import com.lotuss.whattosee.view.fragments.NewMoviesFragment
+import com.lotuss.whattosee.views.fragments.LikedMoviesFragment
+import com.lotuss.whattosee.views.fragments.NewMoviesFragment
 
 
 class SimpleFragmentPagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {

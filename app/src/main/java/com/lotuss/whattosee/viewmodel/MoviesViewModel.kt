@@ -1,10 +1,10 @@
-package com.lotuss.whattosee.viewmodels
+package com.lotuss.whattosee.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.lotuss.whattosee.data.MovieProvider
+import com.lotuss.whattosee.data.provider.MovieProvider
 import com.lotuss.whattosee.data.model.MovieModel
 
 class MoviesViewModel(application: Application) : AndroidViewModel(application) {
@@ -26,5 +26,9 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
 
     fun getMovieById(movieId: Long): LiveData<MovieModel> {
         return movieProvider.getById(movieId)
+    }
+
+    fun getIsConnect(): MutableLiveData<Boolean> {
+        return movieProvider.isConnect
     }
 }

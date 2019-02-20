@@ -1,4 +1,4 @@
-package com.lotuss.whattosee.view.fragments
+package com.lotuss.whattosee.views.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,9 +8,9 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.*
 
 import com.lotuss.whattosee.R
-import com.lotuss.whattosee.view.adapters.MovieAdapter
+import com.lotuss.whattosee.views.adapters.MovieAdapter
 import com.lotuss.whattosee.data.model.MovieModel
-import com.lotuss.whattosee.viewmodels.MoviesViewModel
+import com.lotuss.whattosee.viewmodel.MoviesViewModel
 import kotlinx.android.synthetic.main.new_movies_fragment.*
 import kotlinx.android.synthetic.main.new_movies_fragment.view.*
 
@@ -33,10 +33,14 @@ class NewMoviesFragment : BaseFragment() {
         new_recycler_view.adapter = adapter
         viewModel.getMovies().observe(this, Observer<List<MovieModel>> {
             adapter.setMovies(it!!)
+            adapter.searchMovies(viewModel.searchText.value!!)
             showProgress(it.isEmpty())
         })
         viewModel.searchText.observe(this, Observer<String> {
             adapter.searchMovies(it!!)
+        })
+        viewModel.getIsConnect().observe(this, Observer<Boolean> {
+            showErrorMessage(it!!)
         })
     }
 

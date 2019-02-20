@@ -1,15 +1,14 @@
-package com.lotuss.whattosee.view.activities
+package com.lotuss.whattosee.views.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import com.lotuss.whattosee.R
-import com.lotuss.whattosee.viewmodels.MoviesViewModel
+import com.lotuss.whattosee.viewmodel.MoviesViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 
